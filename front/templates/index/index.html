@@ -1,0 +1,100 @@
+{% extends 'base/front_base.html' %}
+{% load static %}
+{% load share_filters %}
+
+{% block title %}武汉市旅游网站{% endblock %}
+
+{% block stylecss %}
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/image_slide.min.js' %}"></script>
+{% endblock %}
+
+{% block container %}
+    <div class="container-wrapper">
+        <div class="banner-group" id="banner-group">
+            <ul class="banner-ul" id="banner-ul">
+                {% for banner in banners %}
+                    <li><a href="{{ banner.link_to }}"><img src="{{ banner.image_url }}" alt=""></a></li>
+                {% endfor %}
+            </ul>
+            <span class="arrow left-arrow">‹</span>
+            <span class="arrow right-arrow">›</span>
+            <div class="page-control-group">
+                <ul class="page-control">
+                </ul>
+            </div>
+        </div>
+        <div class="scene-list-group">
+            <div class="scene-list-title">热门景点</div>
+            <div class="scene-list-contain">
+
+                <ul class="scene-list-contain-ul">
+                    {% for scene in scenes %}
+                        <li>
+                            <span class="span-img"><img src="{{ scene.thumbnail }}" alt=""></span>
+                            <div class="scene-detail">
+                                <p class="scene-pm" style="font-size: 17px;">
+                                    <span>景点排名：&nbsp&nbsp</span><span>第{{ scene.ranking }}名</span></p>
+                                <p class="scene-name" style="font-size: 17px;">
+                                    <span>景点：&nbsp&nbsp</span><span>{{ scene.title }}</span></p>
+                                <p class="scene-score" style="font-size: 17px;">
+                                    <span>评分：&nbsp&nbsp</span><span>{{ scene.grade }}</span></p>
+                                <p class="scene-text-detail" style="font-size: 17px;">
+                                    <span>简介：&nbsp&nbsp</span><span>{{ scene_info }}</span>
+                                </p>
+                            </div>
+                            <span class="scene-detail-a"><a href="/scene/{{ scene.id }}/">查看详情</a></span>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+            <div class="scene-list-more"><a href="{% url 'WH_scene:index' %}">查看更多景点</a></div>
+        </div>
+        <div class="goods-list-group">
+            <div class="goods-list-title">热门路线</div>
+            <div class="goods-list-contain">
+                <div class="goods-list-contain">
+                    <ul class="goods-list-contain-ul">
+                        {% for good in goods %}
+                            <li>
+                                <span class="span-img"><img src="{{ good.thumbnail }}" alt=""></span>
+                                <div class="goods-detail">
+                                    <p class="goods-pm" style="font-size: 17px;">
+                                        <span>销量：&nbsp&nbsp</span><span>{{ good.sales }}</span></p>
+                                    <p class="goods-name" style="font-size: 17px;">
+                                        <span>线路：&nbsp&nbsp</span><span>{{ good.title }}</span>
+                                    </p>
+                                    <p class="goods-score" style="font-size: 17px;">
+                                        <span>价格：&nbsp&nbsp</span><span>{{ good.prices }}</span>
+                                    </p>
+                                    <p class="goods-text-detail" style="font-size: 17px;">
+                                        <span>特色：&nbsp&nbsp</span><span>{{ good.feature_info }}</span></p>
+                                </div>
+                                <span class="goods-detail-a"><a href="/good/{{ good.id }}/">查看详情</a></span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="goods-list-more"><a href="{% url 'WH_goods:index' %}">查看更多线路</a></div>
+        </div>
+        <div class="share-list-group">
+            <div class="share-list-title">热门讨论</div>
+            <div class="share-list-contain">
+            <ul class="comment-list">
+                {% for comment in comments %}
+                    <li>
+                        <div class="comment-info">
+                            <span class="author"><strong>{{ comment.author.username }}</strong></span>
+                            <span class="pub-time">{{ comment.pub_time|time_since }}</span>
+                        </div>
+                        <div class="comment-content">{{ comment.content|safe }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
+            </div>
+            <div class="share-list-more"><a href="{% url 'WH_share:index' %}">查看更多讨论</a></div>
+        </div>
+    </div>
+{% endblock %}

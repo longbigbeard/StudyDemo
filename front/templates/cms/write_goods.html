@@ -1,0 +1,138 @@
+{% extends 'cms/cms_base.html' %}
+
+{% block title %}
+    {% if goods %}
+        编辑线路
+    {% else %}
+        发布线路
+    {% endif %}
+{% endblock %}
+
+{% block head %}
+    <script src="{% static 'js/write_goods.min.js' %}"></script>
+    <script src="{% static 'ueditor/ueditor.config.js' %}"></script>
+    <script src="{% static 'ueditor/ueditor.all.min.js' %}"></script>
+{% endblock %}
+
+{% block content-wrapper %}
+    <h1>
+    {% if goods %}
+        编辑线路信息
+    {% else %}
+        发布线路信息
+    {% endif %}
+    </h1>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <form action="" class="form">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="title-form">线路名称</label>
+                            {% if goods %}
+                                <input type="text" class="form-control" name="title" id="title-form" value="{{ goods.title }}">
+                            {% else %}
+                                <input type="text" class="form-control" name="title" id="title-form">
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sales-form">线路销量</label>
+                            {% if goods %}
+                                <input type="text" class="form-control" name="sales" id="sales-form" value="{{ goods.sales }}">
+                            {% else %}
+                                <input type="text" class="form-control" name="sales" id="sales-form">
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="prices-form">线路价格</label>
+                            {% if goods %}
+                                <input type="text" class="form-control" name="prices" id="prices-form" value="{{ goods.prices }}">
+                            {% else %}
+                                <input type="text" class="form-control" name="prices" id="prices-form">
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="content-form">线路介绍</label>
+                            {% if goods %}
+                                <script id="info-editor" type="text/plain">{{ goods.goods_info|safe }}</script>
+                            {% else %}
+                                <script id="info-editor" type="text/plain"></script>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="feature-form">线路特色</label>
+                            {% if goods %}
+                                <script id="feature-editor" type="text/plain">{{ goods.feature_info|safe }}</script>
+                            {% else %}
+                                <script id="feature-editor" type="text/plain"></script>
+                            {% endif %}
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="schedule-form">行程安排</label>
+                            {% if goods %}
+                                <script id="schedule-editor" type="text/plain">{{ goods.schedule_goods }}</script>
+                            {% else %}
+                                <script id="schedule-editor" type="text/plain"></script>
+                            {% endif %}
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="attention-form">注意事项</label>
+                            {% if goods %}
+                                <script id="attention-editor" type="text/plain">{{ goods.attention_goods|safe }}</script>
+                            {% else %}
+                                <script id="attention-editor" type="text/plain"></script>
+                            {% endif %}
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="thumbnail-img-form">封面缩略图</label>
+                            <div class="input-group">
+                                {% if goods %}
+                                    <input type="text" class="form-control" name="thumbnail-img" id="thumbnail-img-form" value="{{ goods.thumbnail }}">
+                                {% else %}
+                                    <input type="text" class="form-control" name="thumbnail-img" id="thumbnail-img-form">
+                                {% endif %}
+                                <span class="input-group-btn">
+                                        <label for="" class="btn btn-info btn-file">
+                                            上传图片<input id="thumbnail-btn" type="file" class="btn btn-default"
+                                                       hidden></label>
+                                    </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="video-form">线路视频</label>
+                            <div class="input-group">
+                                {% if goods %}
+                                    <input type="text" class="form-control" name="video" id="video-form" value="{{ goods.goods_video }}">
+                                {% else %}
+                                    <input type="text" class="form-control" name="video" id="video-form">
+                                {% endif %}
+                                <span class="input-group-btn">
+                                    <label for="" class="btn btn-info btn-file">
+                                            上传视频<input id="video-btn" type="file" class="btn btn-default"
+                                                       hidden></label>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button id="submit-btn" class="btn btn-primary pull-right" data-goods-id="{{ goods.pk }}">发布线路</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

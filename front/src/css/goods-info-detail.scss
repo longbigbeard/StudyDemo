@@ -1,0 +1,153 @@
+
+@import "constants.scss";
+@import "base.scss";
+.main{
+    background: #F2F2F2;
+
+    .wrapper{
+        width: $pageWidth;
+        margin: 0 auto;
+        background: #F2F2F2;
+
+        overflow: hidden;
+
+        .container-wrapper{
+            float: left;
+            width: $containerBoxWidth;
+            background: #F2F2F2;
+
+            .scene-detail-group{
+                width: 1150px;
+
+
+                .scene-detail-name{
+                    width: 100%;
+                    height: 40px;
+                    line-height: 40px;
+                    text-align: center;
+                    margin: 0 auto;
+
+                    font-size: 20px;
+                }
+
+                .scene-detail-context{
+                    width: 100%;
+                    margin: 0 auto;
+                    background: white;
+                    padding-top: 30px;
+
+                    .scene-list-contain-ul{
+                        padding-left: 40px;
+                    }
+
+                    .pay-form{
+                        width: 100%;
+                        padding-top: 20px;
+                        padding-left: 40px;
+                        //padding-bottom: 20px;
+
+
+                        table{
+                            width: 100%;
+                            height: 200px;
+                            //border: 1px solid $lineColor;
+                            line-height: 50px;
+
+                            strong{
+                            font-size: 18px;
+                            padding-right: 5px;
+                            }
+                            .form-time-ap{
+                                .form-time{
+                                font-size: 14px;
+                                border: none;
+                                padding-right: 10px;
+                                }
+                            }
+                            .form-tr{
+                                padding-left: 5px;
+
+                                .form-nums{
+                                    width: 60px;
+                                    height: 30px;
+                                    border-radius: 5px;
+                                    outline: none;
+                                }
+                                .form-date{
+                                    width: 150px;
+                                    height: 30px;
+                                    line-height: 30px;
+                                    font-size: 14px;
+                                    border-radius: 3px;
+                                    outline: none;
+                                }
+                                .submit-btn{
+                                    float: right;
+                                    width: 120px;
+                                    height: 50px;
+                                    background: $themeColor;
+                                    border: none;
+                                    color: #fff;
+                                    cursor: pointer;
+                                    border-radius: 5px;
+                                    font-size: 16px;
+                                }
+                            }
+                        }
+                    }
+
+                    .scene-video-title{
+                        width: 100%;
+                        height: 40px;
+                        line-height: 40px;
+                        text-align: center;
+                        margin: 0 auto;
+                        background: whitesmoke;
+                        font-size: 20px;
+                     }
+
+                    .scene-detail-video{
+                        width: 1150px;
+                        height: 600px;
+                        background: #555e67;
+
+                        video{
+                            width: 1150px;
+                            height: 600px;
+                        }
+                    }
+
+                    .goods-xc-info{
+                        text-align: center;
+                        img{
+                            width: 900px;
+                            //height: 870px;
+                        }
+                    }
+                }
+
+                .scene-detail-images{
+                    .images-title{
+                        width: 100%;
+                        height: 60px;
+                        line-height: 60px;
+                        text-align: center;
+                        margin: 0 auto;
+                        background: whitesmoke;
+                        font-size: 20px;
+                    }
+
+                    .images-more{
+
+                    }
+                }
+
+            }
+
+
+
+        }
+
+    }
+}
+

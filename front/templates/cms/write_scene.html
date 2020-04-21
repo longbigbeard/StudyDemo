@@ -1,0 +1,158 @@
+{% extends 'cms/cms_base.html' %}
+
+{% block title %}
+    {% if scene %}
+        编辑景点
+    {% else %}
+        发布景点
+    {% endif %}
+{% endblock %}
+
+{% block head %}
+    <script src="{% static 'js/write_scene.min.js' %}"></script>
+    <script src="{% static 'ueditor/ueditor.config.js' %}"></script>
+    <script src="{% static 'ueditor/ueditor.all.min.js' %}"></script>
+
+{% endblock %}
+
+
+{% block content-wrapper %}
+    <h1>
+        {% if scene %}
+            编辑景点信息
+        {% else %}
+            发布景点信息
+        {% endif %}
+    </h1>
+{% endblock %}
+
+{% if scene %}
+{% else %}
+{% endif %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <form action="" class="form">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="title-form">景点名称</label>
+                            {% if scene %}
+                                <input type="text" class="form-control" name="title" id="title-form"
+                                       value="{{ scene.title }}">
+                            {% else %}
+                                <input type="text" class="form-control" name="title" id="title-form">
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="ranking-form">景点排名</label>
+                            {% if scene %}
+                                <input type="text" class="form-control" name="ranking" id="ranking-form"
+                                       value="{{ scene.ranking }}">
+                            {% else %}
+                                <input type="text" class="form-control" name="ranking" id="ranking-form">
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="grade-form">景点评分</label>
+                            {% if scene %}
+                                <input type="text" class="form-control" name="grade" id="grade-form"
+                                       value="{{ scene.grade }}">
+                            {% else %}
+                                <input type="text" class="form-control" name="grade" id="grade-form">
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="prices-form">门票价格</label>
+                            {% if scene %}
+                                <input type="text" class="form-control" name="prices" id="prices-form"
+                                       value="{{ scene.prices }}">
+                            {% else %}
+                                <input type="text" class="form-control" name="prices" id="prices-form">
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="content-form">景点介绍</label>
+                            {% if scene %}
+                                <script id="info-editor" type="text/plain">{{ scene.scene_info|safe }}</script>
+                            {% else %}
+                                <script id="info-editor" type="text/plain"></script>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="attention-form">注意事项</label>
+                            {% if scene %}
+                                <script id="attention-editor" type="text/plain">{{ scene.danger_info|safe }}</script>
+                            {% else %}
+                                <script id="attention-editor" type="text/plain"></script>
+                            {% endif %}
+
+                        </div>
+                        <div class="form-group">
+                            <label for="more-img-form">更多图片</label>
+                            {% if scene %}
+                                <script id="more-img-editor" type="text/plain">{{ scene.moreimage|safe }}</script>
+                            {% else %}
+                                <script id="more-img-editor" type="text/plain"></script>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="thumbnail-img-form">封面缩略图</label>
+                            <div class="input-group">
+                                {% if scene %}
+                                    <input type="text" class="form-control" name="thumbnail-img" id="thumbnail-img-form"
+                                           value="{{ scene.thumbnail }}">
+                                {% else %}
+                                    <input type="text" class="form-control" name="thumbnail-img"
+                                           id="thumbnail-img-form">
+                                {% endif %}
+                                <span class="input-group-btn">
+                                        <label for="" class="btn btn-info btn-file">
+                                            上传图片<input id="thumbnail-btn" type="file" class="btn btn-default"
+                                                       hidden></label>
+                                    </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="big-img-form">封面图片</label>
+                            <div class="input-group">
+                                {% if scene %}
+                                    <input type="text" class="form-control" name="big-img" id="big-img-form"
+                                           value="{{ scene.bigimage }}">
+                                {% else %}
+                                    <input type="text" class="form-control" name="big-img" id="big-img-form">
+                                {% endif %}
+                                <span class="input-group-btn">
+                                    <label for="" class="btn btn-info btn-file">
+                                            上传图片<input id="big-img-btn" type="file" class="btn btn-default"
+                                                       hidden></label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="video-form">景点视频</label>
+                            <div class="input-group">
+                                {% if scene %}
+                                    <input type="text" class="form-control" name="video" id="video-form"
+                                           value="{{ scene.scene_video }}">
+                                {% else %}
+                                    <input type="text" class="form-control" name="video" id="video-form">
+                                {% endif %}
+                                <span class="input-group-btn">
+                                    <label for="" class="btn btn-info btn-file">
+                                            上传视频<input id="video-btn" type="file" class="btn btn-default"
+                                                       hidden placeholder="视频格式：mp4、webm、flv"></label>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button id="submit-btn" class="btn btn-primary pull-right" data-scene-id="{{ scene.pk }}">发布景色
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

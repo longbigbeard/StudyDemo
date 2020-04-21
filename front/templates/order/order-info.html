@@ -1,0 +1,57 @@
+{% extends 'base/front_base.html' %}
+
+{% block title %}支付订单{% endblock %}
+
+{% block stylecss %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pay_order.min.css' %}">
+    <link rel="stylesheet" href="{% static 'sweetalert/sweetalert.css' %}">
+    <script src="{% static 'sweetalert/sweetalert.min.js' %}"></script>
+    <script src="{% static 'js/myalert.min.js' %}"></script>
+    <script src="{% static 'js/pay_order.min.js' %}"></script>
+{% endblock %}
+
+{% block container %}
+    <div class="wrapper-pay">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>线路名称</th>
+                <th>线路场次</th>
+                <th>出行日期</th>
+                <th>单价(元)</th>
+                <th>人数</th>
+                <th>小计（元）</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td align="left">{{ order.goods.title }}</td>
+                <td>{{ order.which_time }}</td>
+                <td>{{ order.which_date }}</td>
+                <td>{{ order.goods.prices }}</td>
+                <td>{{ order.person_nums }}</td>
+                <td>{{ order.amount }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <form action="" method="post" id="pay-form">
+            <div class="pay-way">
+                <label for="istype-wx">
+                    <input id="istype-wx" type="radio" name="istype" value="2">
+                    <span class="wx-btn">
+                        <img src="http://nos.netease.com/test-edu-image/1BD9F69D6760CE1508D2269864AA54F8.png" alt="">
+                    </span>
+                </label>
+                <label for="istype-zfb">
+                    <input id="istype-zfb" type="radio" name="istype" value="1" checked>
+                    <span class="zfb-btn"></span>
+                </label>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="submit-group">
+                <input type="submit" value="去支付" id="submit-btn" class="submit-btn" data-order-id="{{ order.pk }}">
+            </div>
+        </form>
+    </div>
+{% endblock %}

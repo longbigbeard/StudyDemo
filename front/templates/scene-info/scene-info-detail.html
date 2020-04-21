@@ -1,0 +1,72 @@
+{% extends 'base/front_base.html' %}
+{% load static %}
+
+{% block title %}武汉市热门景点{% endblock %}
+
+{% block stylecss %}
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_681895_q7ptjm0r8n.css">
+    <link rel="stylesheet" href="{% static 'css/scene-info-detail.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="{% static 'js/video.min.js' %}"></script>
+{% endblock %}
+
+{% block container %}
+    <div class="container-wrapper">
+        <div class="scene-detail-group">
+
+            <div class="scene-detail-name"><strong>{{ scene.title }}</strong></div>
+
+            <div class="scene-detail-img"><img src="{{ scene.bigimage }}" alt=""></div>
+
+            <div class="scene-detail-context">
+                <ul class="scene-list-contain-ul">
+                    <li>
+
+                        <p class="scene-pm" style="font-size: 17px;">
+                            <span><strong>景点排名：&nbsp&nbsp</strong></span><span>{{ scene.ranking }}</span></p>
+                        <p class="scene-score" style="font-size: 17px;">
+                            <span><strong>评分：&nbsp&nbsp</strong></span><span>{{ scene.grade }}</span></p>
+                        <p class="scene-price" style="font-size: 17px;">
+                            <span><strong>门票价格：&nbsp&nbsp</strong></span><span>{{ scene.prices }}</span></p>
+                        <p class="scene-text-detail" style="font-size: 17px;">
+                            <span><strong>景点介绍：&nbsp&nbsp</strong></span><span>{{ scene.scene_info|safe }}</span></p>
+                        <p class="scene-text-notice" style="font-size: 17px;">
+                            <span><strong>注意事项：&nbsp&nbsp</strong></span><span>{{ scene.danger_info|safe }}</span></p>
+
+                    </li>
+                </ul>
+                <div class="scene-video-title">视频介绍</div>
+                <div class="scene-detail-video">
+                    <video id="my-video" class="video-js" controls preload="auto" poster="{{ scene.bigimage }}"
+                           data-setup="{}">
+                        <source src="{{ scene.scene_video }}" type="video/mp4">
+                        <source src="{{ scene.scene_video }}" type="video/webm">
+                        <source src="{{ scene.scene_video }}" type="video/flv">
+                        <p class="vjs-no-js"> To view this video please enable JavaScript, and consider upgrading to a
+                            web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports
+                                HTML5 video</a></p>
+                    </video>
+                    {#                    <script src="js/video.min.js"></script>#}
+
+                    <script type="text/javascript">
+                        var myPlayer = videojs('my-video');
+                        videojs("my-video").ready(function () {
+                            var myPlayer = this;
+                            myPlayer.play();
+                        });
+
+                    </script>
+                </div>
+
+            </div>
+
+            <div class="scene-detail-images">
+                <div class="images-title">欣赏更多景区图片</div>
+                <div class="more-img">
+                    {{ scene.moreimage|safe }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

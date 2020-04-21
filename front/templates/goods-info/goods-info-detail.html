@@ -1,0 +1,130 @@
+{% extends 'base/front_base.html' %}
+{% load static %}
+
+{% block title %}武汉市热门景点{% endblock %}
+
+{% block stylecss %}
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_681895_q7ptjm0r8n.css">
+    <link rel="stylesheet" href="{% static 'css/goods-info-detail.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'js/bootstrap.min.js' %}">
+    <link rel="stylesheet" href="{% static 'sweetalert/sweetalert.css' %}">
+    <script src="{% static 'js/video.mim.js' %}"></script>
+    <script src="{% static 'sweetalert/sweetalert.min.js' %}"></script>
+    <script src="{% static 'js/myalert.min.js' %}"></script>
+    <script src="{% static 'js/goods_pay.min.js' %}"></script>
+{% endblock %}
+
+{% block container %}
+    <div class="container-wrapper">
+        <div class="scene-detail-group">
+            <div class="scene-detail-context">
+                <ul class="scene-list-contain-ul">
+                    <li>
+                        <p class="scene-pm" style="font-size: 17px;">
+                            <span><strong>游玩线路：&nbsp&nbsp</strong></span><span>{{ goods.title }}</span>
+                        </p>
+                        <p class="scene-score" style="font-size: 17px;">
+                            <span><strong>销量：&nbsp&nbsp</strong></span><span>{{ goods.sales }}</span></p>
+                        <p class="scene-price" style="font-size: 17px;">
+                            <span><strong>价格：&nbsp&nbsp</strong></span><span>{{ goods.prices }}</span></p>
+                        <p class="scene-text-detail" style="font-size: 17px;">
+                            <span><strong>产品特色：&nbsp&nbsp</strong></span><span>{{ goods.feature_info|safe }}</span>
+                        </p>
+                    </li>
+                </ul>
+
+                <div class="pay-form">
+                    <form action="" method="post">
+                        <table class="table table-striped">
+                            <tr class="form-tr">
+                                <td><strong>选择行程时间：</strong></td>
+                                <td class="form-time-ap">
+                                    <div class="form-row">
+                                        <input type="radio" name="which-time" value="time-am" class="form-time" checked>上午场
+                                        <input type="radio" name="which-time" value="time-pm" class="form-time">下午场
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="form-tr">
+                                <td><strong>选择出行日期：</strong></td>
+                                <td>
+                                    <input type="date" name="which-date" id="cx-date"
+                                                                 class=" form-date">&nbsp&nbsp&nbsp&nbsp<label
+                                            for="cx-date">需提前1天18:30前预订</label>
+                                </td>
+                            </tr>
+                            <tr class="form-tr">
+                                <td><strong>选择出行人数：</strong></td>
+                                <td>
+                                    <select name="person-nums" class="form-control form-nums">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>联系电话：</strong></td>
+                                <td><input type="text" name="telephone" placeholder="请输入联系电话，默认为您注册的手机号码。"
+                                           class="form-control" style="width: 300px"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>备注：</strong></td>
+                                <td>
+                                    <div ><input type="text" name="order_info" class="form-control"></div>
+                                </td>
+                            </tr>
+                            <tr class="form-tr">
+                                <td></td>
+                                <td>
+                                    <button class="submit-btn" id="submit-order" data-goods-id="{{ goods.pk }}"><a
+                                            href="www.baidu.com"></a>立即预定
+                                    </button>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+
+                <div class="scene-video-title">视频介绍</div>
+                <div class="scene-detail-video">
+                    <video id="my-video" class="video-js" controls preload="auto"
+                           poster="{% static 'images/wh_1.png' %}" data-setup="{}">
+                        <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+                        <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm">
+                        <source src="http://vjs.zencdn.net/v/oceans.ogv" type="video/ogg">
+                        <p class="vjs-no-js"> To view this video please enable JavaScript, and consider upgrading to a
+                            web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports
+                                HTML5 video</a></p>
+                    </video>
+                    <script type="text/javascript">
+                        var myPlayer = videojs('my-video');
+                        videojs("my-video").ready(function () {
+                            var myPlayer = this;
+                            myPlayer.play();
+                        });
+                    </script>
+                </div>
+                <div class="scene-video-title">图文详情</div>
+                <div class="goods-xc-info">
+                    {{ goods.goods_info|safe }}
+                </div>
+                <div class="scene-video-title">行程简介</div>
+                <div class="goods-xc-info">
+                    {{ goods.schedule_goods|safe }}
+                </div>
+                <div class="scene-video-title">注意事项</div>
+                <div class="goods-xc-info">
+                    {{ goods.attention_goods|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

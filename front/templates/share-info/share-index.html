@@ -1,0 +1,93 @@
+{% extends 'base/front_base.html' %}
+{% load static %}
+{% load share_filters %}
+
+{% block title %}武汉市旅游网站{% endblock %}
+
+{% block stylecss %}
+    <link rel="stylesheet" href="{% static 'adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'adminlte/bower_components/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'adminlte/dist/css/AdminLTE.min.css' %}">
+    <link rel="stylesheet" href="{% static 'adminlte/dist/css/skins/_all-skins.min.css' %}">
+    <link rel="stylesheet" href="{% static 'adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css' %}">
+    <link rel="stylesheet" href="{% static 'sweetalert/sweetalert.css' %}">
+    <link rel="stylesheet" href="{% static 'css/share-index.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/more-list-btn.min.css' %}">
+
+    <script src="{% static 'adminlte/bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'adminlte/bower_components/jquery-ui/jquery-ui.min.js' %}"></script>
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <script src="{% static 'adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'adminlte/dist/js/adminlte.min.js' %}"></script>
+    <script src="{% static 'sweetalert/sweetalert.min.js' %}"></script>
+    <script src="{% static 'js/myajax.min.js' %}"></script>
+    <script src="{% static 'js/myalert.min.js' %}"></script>
+    <script src="{% static 'js/message.min.js' %}"></script>
+
+
+    <script src="{% static 'ueditor/ueditor.config.js' %}"></script>
+    <script src="{% static 'ueditor/ueditor.all.min.js' %}"></script>
+    <script src="{% static 'js/share_index.min.js' %}"></script>
+    <script src="{% static 'sweetalert/sweetalert.min.js' %}"></script>
+    <script src="{% static 'arttemplate/template-web.js' %}"></script>
+
+    <script id="share-content-item" type="text/html">
+
+        {% verbatim %}
+        {{ each comments comment index }}
+            <li>
+                <div class="comment-info">
+                    <span class="author"><strong>{{ comment.author.username }}</strong></span>
+                    <span class="pub-time">{{ comment.pub_time|timeSince }}</span>
+                </div>
+                <p class="comment-content">{{ comment.content}}</p>
+            </li>
+        {{ /each }}
+        {% endverbatim %}
+    </script>
+
+
+{% endblock %}
+
+{% block container %}
+    <div class="container-wrapper">
+        <div class="comment-wrapper">
+            <div class="ueditor-group">
+                {% if user.is_authenticated %}
+                    <div class="form-group edit-content">
+
+                        <script id="share-content-editor" type="text/plain"></script>
+
+                    </div>
+                    <div class="submit-btn-group">
+                        <button class="submit-btn" id="submit-btn">立即评论</button>
+                    </div>
+                {% else %}
+                    <textarea name="text" class="comment-textarea" placeholder="请登录评论!" disabled="disabled"></textarea>
+                {% endif %}
+
+            </div>
+
+
+            <ul class="comment-list">
+                {% for comment in comments %}
+                    <li>
+                        <div class="comment-info">
+                            <span class="author"><strong>{{ comment.author.username }}</strong></span>
+                            <span class="pub-time">{{ comment.pub_time|time_since }}</span>
+                        </div>
+                        <p class="comment-content">{{ comment.content|safe }}</p>
+                    </li>
+                {% endfor %}
+
+
+            </ul>
+            <div class="load-list-more">
+                <button class="btn-btn-load" id="load-more-btn">查看更多评论</button>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

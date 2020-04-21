@@ -1,0 +1,55 @@
+{% extends 'cms/cms_base.html' %}
+
+{% block title %}员工管理{% endblock %}
+
+{% block head %}
+    <script src="{% static 'js/cms_del_staff.min.js' %}"></script>
+{% endblock %}
+
+{% block content-wrapper %}<h1>员工管理</h1>{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <a href="{% url 'WH_cms:add_staffs' %}" class="btn btn-primary pull-right">添加员工</a>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>手机号</th>
+                            <th>所属分组</th>
+                            <th>操作</th>
+                        </tr>
+                        <tbody>
+                        {% for staff in staffs %}
+                            <tr>
+                                <td>{{ staff.username }}</td>
+                                <td>{{ staff.telephone }}</td>
+                                <td>
+                                    {% if staff.is_superuser %}
+                                        超级管理员
+                                    {% else %}
+                                        {% for group in staff.groups.all %}
+                                            {{ group.name }}/
+                                        {% endfor %}
+
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-xs btn-del" data-staff-id="{{ staff.pk }}">删除</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

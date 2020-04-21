@@ -1,0 +1,134 @@
+
+@import "constants.scss";
+@import "base.scss";
+
+.main{
+
+
+    .wrapper{
+        width: $pageWidth;
+        margin: 0 auto;
+        background: #F2F2F2;
+
+        overflow: hidden;
+
+        .container-wrapper{
+            float: left;
+            width: $containerBoxWidth;
+
+            background: #F2F2F2;
+
+            .goods-list-group{
+                width: 100%;
+                border: 1px solid #eeeeee;
+                border-left: none;
+                border-right: none;
+
+                .goods-list-title{
+                    width: 100%;
+                    height: 40px;
+                    line-height: 40px;
+                    text-align: center;
+                    margin: 0 auto;
+                    background: whitesmoke;
+                    font-size: 20px;
+                }
+
+                .goods-list-contain{
+                    width: 100%;
+
+                    margin: 0 auto;
+                    border: 1px solid #eeeeee;
+
+                    .goods-list-contain-ul{
+                        background: white;
+
+                        li{
+                            padding: 20px;
+
+                            .span-img{
+                                margin: 0 auto;
+                                width: 270px;
+                                height: 170px;
+                                float: left;
+
+                                img{
+                                    width: 100%;
+                                    height: 100%;
+                                }
+
+                            }
+                            .goods-detail{
+                                margin: 0 auto;
+                                width: 700px;
+                                height: 170px;
+                                float: left;
+                                background: whitesmoke;
+                                border: 1px solid #eeeeee;
+                                padding-left: 30px;
+
+                                .goods-pm{
+                                    height: 30px;
+                                    line-height: 30px;
+                                    padding-top: 10px;
+                                }
+
+                                .goods-name{
+                                    height: 30px;
+                                    line-height: 30px;
+                                    padding-top: 5px;
+                                }
+
+                                .goods-score{
+                                    height: 30px;
+                                    line-height: 30px;
+                                    padding-top: 5px;
+                                }
+
+                                .goods-text-detail{
+                                    height: 30px;
+                                    line-height: 30px;
+                                    padding-top: 5px;
+                                }
+
+                            }
+
+                            .goods-detail-a{
+
+                                height: 170px;
+                                line-height: 170px;
+                                text-align: center;
+                                display: block;
+                                border: 1px solid #eeeeee;
+                                background: grey;
+                                a{
+                                    color: white;
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .goods-list-more{
+                    width: 100%;
+                    height: 30px;
+                    line-height: 30px;
+                    text-align: center;
+                    margin: 0 auto;
+                    background: grey;
+
+                    a{
+                        font-size: 18px;
+                        color: whitesmoke;
+                    }
+                }
+
+            }
+
+
+        }
+
+    }
+}
+

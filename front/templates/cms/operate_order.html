@@ -1,0 +1,196 @@
+{% extends 'cms/cms_base.html' %}
+{% load share_filters %}
+
+{% block title %}订单操作{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet"
+          href="{% static 'adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}">
+    <script src="{% static 'adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'adminlte/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min.js' %}"></script>
+    <script src="{% static 'js/cms_operate_order.min.js' %}"></script>
+
+    <style>
+        .left-group {
+            margin-left: 40px;
+        }
+    </style>
+{% endblock %}
+
+{% block content-wrapper %}
+    <h1>订单操作</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <form action="" class="form-inline">
+                        <div class="form-group left-group">
+                            <label for="">时间:</label>
+                            {% if start %}
+                                <input type="text" id="start-picker" class="form-control" name="start"
+                                       placeholder="起始时间" readonly value="{{ start }}">
+                            {% else %}
+                                <input type="text" id="start-picker" class="form-control" name="start"
+                                       placeholder="起始时间" readonly>
+                            {% endif %}
+                            <span>--</span>
+                            {% if end %}
+                                <input type="text" id="end-picker" class="form-control" name="end" placeholder="结束时间"
+                                       value="{{ end }}" readonly>
+                            {% else %}
+                                <input type="text" id="end-picker" class="form-control" name="end" placeholder="结束时间"
+                                       readonly>
+                            {% endif %}
+                        </div>
+                        <div class="form-group left-group">
+                            <label for="title-input">订单：</label>
+                            {% if order_tel %}
+                                <input type="text" class="form-control" name="order_tel" id="title-input"
+                                       placeholder="订单手机号码"
+                                       value="{{ order_tel }}">
+                            {% else %}
+                                <input type="text" class="form-control" name="order_tel" id="title-input"
+                                       placeholder="订单手机号码">
+                            {% endif %}
+                        </div>
+                        <div class="form-group left-group">
+                            <label for="title-input">查询处理：</label>
+                            <select name="isdeal" id="" class="form-control">
+                                {% if isdeal == "0" %}
+                                    <option value="0" selected>已处理</option>
+                                {% elif isdeal == "1" %}
+                                    <option value="1" selected>未处理</option>
+                                {% else %}
+                                    <option value="" selected>全部</option>
+                                    <option value="0">已处理</option>
+                                    <option value="1">未处理</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                        <div class="form-group left-group">
+                            <label for="title-input">查询退订：</label>
+                            <select name="isrem" id="" class="form-control">
+                                {% if isrem == "3" %}
+                                    <option value="3" selected>已退订</option>
+                                {% elif isrem == "4" %}
+                                    <option value="4">退订中</option>
+                                {% else %}
+                                    <option value="" selected>全部</option>
+                                    <option value="4">退订中</option>
+                                    <option value="3">已退订</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                        <div class="form-group left-group">
+                            <label for="title-input">新订单：</label>
+                            <select name="isnew" id="" class="form-control">
+                                {% if isnew == "1" %}
+                                    <option value="1" selected>是</option>
+                                {% else %}
+                                    <option value="" selected>全部</option>
+                                    <option value="1">是</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                        <div class="form-group left-group">
+                            <button class="btn btn-primary btn-search">查询</button>
+                        </div>
+                        <div class="form-group left-group">
+                            <a href="{% url 'WH_cms:operate_order' %}">清除查询</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>用户</th>
+                            <th>线路</th>
+                            <th>手机号</th>
+                            <th>留言</th>
+                            <th>场次</th>
+                            <th>日期</th>
+                            <th>人数</th>
+                            <th>费用</th>
+                            <th>支付方式</th>
+                            <th>订单状态</th>
+                            <th>是否处理</th>
+                            <th>订单时间</th>
+                            <th>操作</th>
+                        </tr>
+                        <tbody>
+                        {% for order in orders %}
+                            <tr>
+                                <td>{{ order.buyer.username }}</td>
+                                <td><a target="_blank"
+                                       href="{% url 'WH_goods:goods_detail' goods_id=order.goods.pk %}">{{ order.goods.title }}</a>
+                                </td>
+                                <td>{{ order.order_tel }}</td>
+                                <td>{{ order.order_info }}</td>
+                                <td>{{ order.which_time }}</td>
+                                <td>{{ order.which_date }}</td>
+                                <td>{{ order.person_nums }}</td>
+                                <td>{{ order.amount }}</td>
+                                <td>{{ order.istype }}</td>
+                                <td>{{ order.status }}</td>
+                                <td>{{ order.isdeal }}</td>
+                                <td>{{ order.pub_time|time_format }}</td>
+                                <td>
+                                    <button class="btn btn-info btn-xs delete-btn" data-order-id="{{ order.pk }}">处理
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box-footer">
+                    <p class="pull-left">第{{ current_page }}/总共{{ num_pages }}页</p>
+                    <ul class="pagination pull-right">
+                        {#上一页#}
+                        {% if page_obj.has_previous %}
+                            <li><a href="?p={{ page_obj.previous_page_number }}{{ url_query }}">上一页</a></li>
+                        {% else %}
+                            <li class="disabled"><a href="javascript:void(0);">上一页</a></li>
+                        {% endif %}
+
+                        {# 是否需要出现三个点 #}
+                        {% if left_has_more %}
+                            <li><a href="?p=1">1</a></li>
+                            <li><a href="javascript:void(0);">...</a></li>
+                        {% endif %}
+
+                        {# 左边的页码 #}
+                        {% for left_page in left_pages %}
+                            <li><a href="?p={{ left_page }}{{ url_query }}">{{ left_page }}</a></li>
+                        {% endfor %}
+
+                        {# 当前的页面 #}
+                        <li class="active"><a href="?p={{ current_page }}{{ url_query }}">{{ current_page }}</a></li>
+
+                        {# 右边的页码 #}
+                        {% for right_page in right_pages %}
+                            <li><a href="?p={{ right_page }}{{ url_query }}">{{ right_page }}</a></li>
+                        {% endfor %}
+
+                        {# 用来控制右边三个点 #}
+                        {% if right_has_more %}
+                            <li><a href="javascript:void(0);">...</a></li>
+                            <li><a href="?p={{ num_pages }}{{ url_query }}">{{ num_pages }}</a></li>
+                        {% endif %}
+
+                        {#下一页#}
+                        {% if page_obj.has_next %}
+                            <li><a href="?p={{ page_obj.next_page_number }}{{ url_query }}">下一页</a></li>
+                        {% else %}
+                            <li class="disabled"><a href="javascript:void(0);">下一页</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

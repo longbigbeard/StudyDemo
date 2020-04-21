@@ -1,0 +1,70 @@
+{% extends 'base/front_base.html' %}
+{% load static %}
+
+{% block title %}景点详情{% endblock %}
+
+{% block stylecss %}
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/more-list-btn.min.css' %}">
+    <script src="{% static 'js/scene_index.min.js' %}"></script>
+    <script src="{% static 'arttemplate/template-web.js' %}"></script>
+
+
+    <script id="scenes-item" type="text/html">
+        {% verbatim %}
+        {{ each scenes scene index }}
+        <li>
+            <span class="span-img"><img src="{{ scene.thumbnail }}" alt=""></span>
+            <div class="scene-detail">
+                <p class="scene-pm" style="font-size: 17px;">
+                    <span>景点排名：&nbsp&nbsp</span><span>{{ scene.ranking }}</span></p>
+                <p class="scene-name" style="font-size: 17px;">
+                    <span>景点：&nbsp&nbsp</span><span>{{ scene.title }}</span></p>
+                <p class="scene-score" style="font-size: 17px;">
+                    <span>评分：&nbsp&nbsp</span><span>{{ scene.grade }}</span></p>
+                <p class="scene-text-detail" style="font-size: 17px;">
+                    <span>简介：&nbsp&nbsp</span><span>{{ scene.scene_info }}</span>
+                </p>
+            </div>
+            <span class="scene-detail-a"><a href="/scene/{{ scene.id }}/">查看详情</a></span>
+        </li>
+        {{ /each }}
+        {% endverbatim %}
+    </script>
+
+{% endblock %}
+
+{% block container %}
+    <div class="container-wrapper">
+        <div class="scene-list-group">
+            <div class="scene-list-title">热门景点</div>
+            <div class="scene-list-contain">
+                <ul class="scene-list-contain-ul">
+                    {% for scene in scenes %}
+                        <li>
+                            <span class="span-img"><img src="{{ scene.thumbnail }}" alt=""></span>
+                            <div class="scene-detail">
+                                <p class="scene-pm" style="font-size: 17px;">
+                                    <span>景点排名：&nbsp&nbsp</span><span>{{ scene.ranking }}</span></p>
+                                <p class="scene-name" style="font-size: 17px;">
+                                    <span>景点：&nbsp&nbsp</span><span>{{ scene.title }}</span></p>
+                                <p class="scene-score" style="font-size: 17px;">
+                                    <span>评分：&nbsp&nbsp</span><span>{{ scene.grade }}</span></p>
+                                <p class="scene-text-detail" style="font-size: 17px;">
+                                    <span>简介：&nbsp&nbsp</span><span>{{ scene.scene_info }}</span>
+                                </p>
+                            </div>
+                            <span class="scene-detail-a"><a
+                                    href="{% url 'WH_scene:scenes_detail' scenes_id=scene.id %}">查看详情</a></span>
+                        </li>
+                    {% endfor %}
+
+
+                </ul>
+            </div>
+            <div class="load-list-more">
+                <button class="btn-btn-load" id="load-more-btn">查看更多景点</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

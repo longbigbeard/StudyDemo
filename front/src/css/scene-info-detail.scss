@@ -1,0 +1,97 @@
+
+@import "constants.scss";
+@import "base.scss";
+.main{
+    background: #F2F2F2;
+
+    .wrapper{
+        width: $pageWidth;
+        margin: 0 auto;
+        background: #F2F2F2;
+
+        overflow: hidden;
+
+        .container-wrapper{
+            float: left;
+            width: $containerBoxWidth;
+            background: #F2F2F2;
+
+            .scene-detail-group{
+                width: 1150px;
+
+
+                .scene-detail-name{
+                    width: 100%;
+                    height: 40px;
+                    line-height: 40px;
+                    text-align: center;
+                    margin: 0 auto;
+                    background: whitesmoke;
+                    font-size: 20px;
+                }
+
+                .scene-detail-img{
+                    width: 1150px;
+                    height: 500px;
+                }
+
+                .scene-detail-context{
+                    width: 100%;
+                    margin: 0 auto;
+                    background: white;
+                    padding-top: 30px;
+
+                    .scene-list-contain-ul{
+                        padding-left: 40px;
+                    }
+
+                    .scene-video-title{
+                    width: 100%;
+                    height: 40px;
+                    line-height: 40px;
+                    text-align: center;
+                    margin: 0 auto;
+                    background: whitesmoke;
+                    font-size: 20px;
+                }
+
+                .scene-detail-video{
+                    width: 1150px;
+                    height: 600px;
+                    background: #555e67;
+
+                    video{
+                        width: 1150px;
+                        height: 600px;
+                    }
+                }
+                }
+
+                .scene-detail-images{
+                    .images-title{
+                        width: 100%;
+                    height: 60px;
+                    line-height: 60px;
+                    text-align: center;
+                    margin: 0 auto;
+                    background: whitesmoke;
+                    font-size: 20px;
+                    }
+
+                    .more-img{
+                        width: 1150px;
+                        img{
+                            width: 1150px;
+                        }
+                    }
+                }
+
+            }
+
+
+
+        }
+
+    }
+}
+

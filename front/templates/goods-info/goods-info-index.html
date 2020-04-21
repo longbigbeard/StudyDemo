@@ -1,0 +1,69 @@
+{% extends 'base/front_base.html' %}
+{% load static %}
+
+{% block title %}热门旅游路线{% endblock %}
+
+{% block stylecss %}
+    <link rel="stylesheet" href="{% static 'css/goods-info-index.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/more-list-btn.min.css' %}">
+    <script src="{% static 'js/goods_index.min.js' %}"></script>
+    <script src="{% static 'arttemplate/template-web.js' %}"></script>
+
+    <script id="goods-item" type="text/html">
+        {% verbatim %}
+        {{ each goods good index }}
+        <li>
+            <span class="span-img"><img src="{{ good.thumbnail }}" alt=""></span>
+            <div class="goods-detail">
+                <p class="goods-pm" style="font-size: 17px;">
+                    <span>销量：&nbsp&nbsp</span><span>{{ good.sales }}</span></p>
+                <p class="goods-name" style="font-size: 17px;">
+                    <span>线路：&nbsp&nbsp</span><span>{{ good.title }}</span></p>
+                <p class="goods-score" style="font-size: 17px;">
+                    <span>价格：&nbsp&nbsp</span><span>{{ good.prices }}</span></p>
+                <p class="goods-text-detail" style="font-size: 17px;"><span>特色：&nbsp&nbsp</span><span>{{ good.feature_info }}</span>
+                </p>
+            </div>
+            <span class="goods-detail-a"><a href="/good/{{ good.id }}/">查看详情</a></span>
+        </li>
+        {{ /each }}
+        {% endverbatim %}
+    </script>
+
+{% endblock %}
+
+{% block container %}
+    <div class="container-wrapper">
+        <div class="goods-list-group">
+            <div class="goods-list-title">热门路线</div>
+            <div class="goods-list-contain">
+                <div class="goods-list-contain">
+                    <ul class="goods-list-contain-ul">
+                        {% for good in goods %}
+                            <li>
+                                <span class="span-img"><img src="{{ good.thumbnail }}" alt=""></span>
+                                <div class="goods-detail">
+                                    <p class="goods-pm" style="font-size: 17px;">
+                                        <span>销量：&nbsp&nbsp</span><span>{{ good.sales }}</span></p>
+                                    <p class="goods-name" style="font-size: 17px;">
+                                        <span>线路：&nbsp&nbsp</span><span>{{ good.title }}</span></p>
+                                    <p class="goods-score" style="font-size: 17px;">
+                                        <span>价格：&nbsp&nbsp</span><span>{{ good.prices }}</span></p>
+                                    <p class="goods-text-detail" style="font-size: 17px;">
+                                        <span>特色：&nbsp&nbsp</span><span>{{ good.feature_info }}</span>
+                                    </p>
+                                </div>
+                                <span class="goods-detail-a"><a href="/good/{{ good.id }}/">查看详情</a></span>
+                            </li>
+                        {% endfor %}
+
+
+                    </ul>
+                </div>
+            </div>
+            <div class="load-list-more">
+                <button class="btn-btn-load" id="load-more-btn">查看更多线路</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
